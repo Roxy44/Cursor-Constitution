@@ -50,6 +50,19 @@ the user names them. Multiple picks in one group are fine (e.g. ORM + database).
 - vanilla CSS
 - other
 
+## Frontend — CSS naming (optional)
+
+**Do not offer this group** when styling is Tailwind / UnoCSS / Windi or CSS-in-JS
+(styled-components, Emotion, Stitches, Linaria, …). Record `CSS naming: n/a` — BEM cannot
+be applied there and must not be mixed with utility or `styled` APIs.
+
+Ask only for classic named classes: CSS Modules, SCSS/Sass/Less, plain CSS blocks (or a
+hybrid that still has custom block classes). Record in `stack.mdc` as **CSS naming**.
+
+- BEM (`block__element--modifier`)
+- existing project convention (match the repo)
+- none (classic CSS without BEM)
+
 ## Frontend — state
 
 - local state (+ Context)

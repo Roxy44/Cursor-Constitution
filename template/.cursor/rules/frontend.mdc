@@ -6,9 +6,11 @@ alwaysApply: false
 
 # Frontend
 
-Architecture for UI code. Form rules are in `code-style.mdc`. Deeper patterns and
-directory strategies: `docs/methodologies/frontend.md` — open it only when the structure
-of a new feature or layer is actually in question.
+Architecture for UI code. Form rules are in `code-style.mdc`. Honor constitution
+**P-6 KISS**, **P-7 DRY**, **P-8 SOLID**. Deeper patterns and directory strategies:
+`docs/methodologies/frontend.md` — open it only when the structure of a new feature or
+layer is actually in question. BEM / naming trade-offs:
+`docs/methodologies/design-principles.md`.
 
 ## Components
 
@@ -47,6 +49,18 @@ of a new feature or layer is actually in question.
   class names.
 - Spacing, color, and typography come from the project's tokens or scale, not ad-hoc
   values.
+- **CSS naming / BEM:** follow `CSS naming` in `project/stack.mdc`. Never mix systems.
+  - Styling is Tailwind / UnoCSS / CSS-in-JS (styled-components, Emotion, …) → treat as
+    `n/a`: use only that system's idioms. Do **not** invent BEM (`block__el--mod`) class
+    names alongside utility or styled APIs — even if `CSS naming` was left wrong; fix
+    `stack.mdc` to `n/a` when you notice the mismatch.
+  - `bem` — only with classic CSS / SCSS / CSS Modules (or hybrid custom classes). Use
+    Block__Element--modifier (or the project's documented BEM dialect). Details:
+    `docs/methodologies/design-principles.md`.
+  - `none` / `n/a` — do not invent BEM.
+  - `TBD` and the task adds **classic** named CSS classes (not utilities / not
+    `styled.*`) — ask once (`bem` / `existing` / `none`), record, then proceed. If the
+    task only touches Tailwind/CSS-in-JS, write `n/a` and do not ask.
 
 ## Accessibility
 

@@ -183,12 +183,12 @@ lockfile или выбором; проверит PATH), **какой линте�
 | Файл                                           | Зачем                                                |
 | ---------------------------------------------- | ---------------------------------------------------- |
 | `constitution.mdc`                             | Непереговорное + карта остального                    |
-| `project/stack.mdc`                            | Стек, язык, выбор линта (install + onboarding)       |
+| `project/stack.mdc`                            | Стек, язык, линт, CSS naming / BEM (install + onboarding)       |
 | `code-style.mdc`                               | Форма кода + интенты линтера                         |
 | `frontend.mdc` / `backend.mdc` / `testing.mdc` | Короткая архитектура по зоне                         |
 | `onboarding.mdc`                               | Опрос стека / tooling                                |
 | `retrospective.mdc`                            | Как писать уроки после факапов                       |
-| `docs/methodologies/*`                         | Глубокие гайды (паттерны, виды тестов, git, tooling) |
+| `docs/methodologies/*`                         | Глубокие гайды (принципы, паттерны, виды тестов, git, tooling) |
 
 
 ---

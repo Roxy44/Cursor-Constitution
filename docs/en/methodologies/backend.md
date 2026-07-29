@@ -43,6 +43,9 @@ Decision test before adding one:
 2. Which pattern removes that pain with the **smallest** new surface?
 3. Can a plain function + interface do it? If yes, stop there.
 
+Also see [`design-principles.md`](design-principles.md) (KISS / DRY / SOLID) — patterns are
+tools under those defaults, not a substitute for them.
+
 ### Creational (object creation)
 
 | Pattern | Backend use | Avoid when |

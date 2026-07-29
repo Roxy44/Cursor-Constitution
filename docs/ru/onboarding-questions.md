@@ -25,6 +25,11 @@ UI нет (CLI / другие клиенты).
    - Живой проект: что уже видно в манифесте — что поправить?
    - Пустой проект: выбрать из [`stack-catalog.md`](stack-catalog.md) (только группы,
      подходящие к типу из п. 2). «Другое» — всегда ок.
+   - CSS naming на фронте: спрашивать **только** при классическом CSS / SCSS / CSS
+     Modules. Если стили — Tailwind, UnoCSS или CSS-in-JS (styled-components, Emotion, …)
+     → писать `n/a`, **не** спрашивать про BEM (смесь BEM с утилитами/`styled` путает
+     агента). Варианты при вопросе: `bem` / `existing` / `none`. Только бэкенд → `n/a`.
+     KISS / DRY / SOLID всегда включены — не спрашивать.
 4. **Менеджер пакетов.** npm / pnpm / yarn / bun (или poetry / uv / go / cargo…). В живом
    проекте — по lockfile, с подтверждением. Один `package-lock.json` может означать
    **npm или yarn** — спросить, если `packageManager` / `.yarnrc*` не проясняют. Агент
@@ -42,6 +47,7 @@ UI нет (CLI / другие клиенты).
 | Ответ | Куда попадает |
 | --- | --- |
 | Язык, стек, команды проверки, ограничения | `.cursor/rules/project/stack.mdc` (загружается всегда, поэтому коротко) |
+| CSS naming (BEM или нет) | `CSS naming` в `stack.mdc` (`bem` / `existing` / `none` / `n/a`) |
 | Тип проекта | Определяет, какие правила остаются: `frontend.mdc`, `backend.mdc` или оба |
 | Договорённости и контекст, не выводимый из кода | `.cursor/project-memory/knowledge-base.md` |
 | Идеи и отложенные решения | `.cursor/project-memory/ideas.md`, `tasks.md` |

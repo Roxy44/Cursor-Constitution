@@ -171,12 +171,12 @@ If you choose **none**, the agent still tries to follow `code-style.mdc`, but no
 | File | Job |
 | --- | --- |
 | `constitution.mdc` | Non-negotiables + map to everything else |
-| `project/stack.mdc` | Your stack, language, lint choice (filled by install + onboarding) |
+| `project/stack.mdc` | Your stack, language, lint choice, CSS naming / BEM (filled by install + onboarding) |
 | `code-style.mdc` | Form + linter intents |
 | `frontend.mdc` / `backend.mdc` / `testing.mdc` | Short architecture per area |
 | `onboarding.mdc` | Stack / tooling interview |
 | `retrospective.mdc` | How to write lessons after failures |
-| `docs/methodologies/*` | Deeper guides (patterns, testing types, git, tooling) |
+| `docs/methodologies/*` | Deeper guides (design principles, patterns, testing types, git, tooling) |
 
 ---
 

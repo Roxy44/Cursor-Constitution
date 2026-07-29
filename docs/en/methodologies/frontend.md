@@ -13,7 +13,9 @@ designing a new feature, layer, or folder structure.
 | Domain modules (`modules/<domain>`) | Monolith with clear domains | Boundaries blur without import linting |
 
 Rule of thumb: **do not over-structure early**. Flat → feature-based is cheap; the reverse
-is not. Take FSD when more than one team owns the UI and someone enforces layers.
+is not. Take FSD when more than one team owns the UI and someone enforces layers. Structure
+choices still obey KISS / DRY / SOLID — see
+[`design-principles.md`](design-principles.md).
 
 ## Module boundaries
 

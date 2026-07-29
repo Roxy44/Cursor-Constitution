@@ -24,6 +24,11 @@ Works in two situations:
    - Existing project: what the manifest already shows — what to correct?
    - Empty project: pick from [`stack-catalog.md`](stack-catalog.md) (only groups that
      match question 2). "Other" is always fine.
+   - Frontend CSS naming: ask **only** for classic CSS / SCSS / CSS Modules. If styling is
+     Tailwind, UnoCSS, or CSS-in-JS (styled-components, Emotion, …) → write `n/a` — do
+     **not** ask about BEM (mixing BEM with utilities/`styled` confuses agents).
+     Options when asking: `bem` / `existing` / `none`. Backend-only → `n/a`.
+     KISS / DRY / SOLID are always on — do not ask.
 4. **Package manager.** npm / pnpm / yarn / bun (or poetry / uv / go / cargo…). Infer from
    the lockfile when present; confirm. `package-lock.json` alone can mean **npm or yarn**
    — ask if `packageManager` / `.yarnrc*` do not settle it. Agent verifies the CLI is on
@@ -41,6 +46,7 @@ Works in two situations:
 | Answer | Destination |
 | --- | --- |
 | Language, stack, verify commands, constraints | `.cursor/rules/project/stack.mdc` (always loaded — keep it short) |
+| CSS naming (BEM or not) | `CSS naming` in `stack.mdc` (`bem` / `existing` / `none` / `n/a`) |
 | Project type | Which rules stay: `frontend.mdc`, `backend.mdc`, or both |
 | Agreements not visible in code | `.cursor/project-memory/knowledge-base.md` |
 | Ideas and deferred decisions | `.cursor/project-memory/ideas.md`, `tasks.md` |

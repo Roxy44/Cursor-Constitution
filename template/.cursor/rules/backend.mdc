@@ -6,9 +6,11 @@ alwaysApply: false
 
 # Backend
 
-Architecture for server-side code. Form rules are in `code-style.mdc`. Deeper patterns,
-catalog, and when-to-use tables: `docs/methodologies/backend.md` — open only when
-designing a new layer, abstraction, or integration.
+Architecture for server-side code. Form rules are in `code-style.mdc`. Honor constitution
+**P-6 KISS**, **P-7 DRY**, **P-8 SOLID** on every change. Deeper patterns, catalog, and
+when-to-use tables: `docs/methodologies/backend.md` — open only when designing a new
+layer, abstraction, or integration. Decision tests for the principles:
+`docs/methodologies/design-principles.md`.
 
 ## Layering
 

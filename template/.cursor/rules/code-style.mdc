@@ -9,6 +9,16 @@ alwaysApply: false
 How code must look here. Behavior lives in `constitution.mdc`; this file governs form and
 lint intents. Framework architecture lives in `frontend.mdc` / `backend.mdc`.
 
+## Design principles (always)
+
+While writing or editing source, honor constitution **P-6 KISS**, **P-7 DRY**, and
+**P-8 SOLID**. Prefer a small clear change over a clever structure. When a trade-off is
+non-obvious (e.g. extract now vs duplicate once), open
+`docs/methodologies/design-principles.md` and apply the decision tests there. CSS class
+naming (BEM) is optional — only when `CSS naming` in `project/stack.mdc` says `bem`
+(classic CSS / SCSS / Modules). Never combine BEM with Tailwind utilities or CSS-in-JS
+(see `frontend.mdc`).
+
 ## Stack awareness
 
 - Detect the stack from `project/stack.mdc`, then confirm against `package.json` and the

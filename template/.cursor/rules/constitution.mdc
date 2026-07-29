@@ -28,6 +28,16 @@ comments unless `UI / product copy` or hard constraints say so.
   before expanding it.
 - **P-5 Leave it working.** Never end a turn with a broken build, unresolved errors you
   introduced, or half-applied edits.
+- **P-6 KISS.** Prefer the simplest solution that correctly solves the stated problem. No
+  speculative abstraction, no framework for a one-liner, no config surface "for later".
+- **P-7 DRY.** Do not duplicate non-trivial logic. Extract a shared piece only after it is
+  used in two real places and the shared shape is clear — a wrong abstraction is worse
+  than a short copy. Copying twice with a stated reason beats a premature helper.
+- **P-8 SOLID.** Apply Single Responsibility, Open-Closed, Liskov, Interface Segregation,
+  and Dependency Inversion at a scale that fits the task. Prefer small modules with one
+  reason to change; depend on abstractions the project already uses. Do not force
+  ceremony into a tiny script. Deeper guidance:
+  `docs/methodologies/design-principles.md`.
 
 ## 2. Workflow
 
@@ -117,6 +127,7 @@ Load exactly one of these when its trigger matches. Never open them all.
 | Empty repo — need stack options | `docs/stack-catalog.md` (via onboarding) |
 | Recording a lesson after a failure | `retrospective.mdc` |
 | Need deeper architecture guidance | `docs/methodologies/{frontend,backend}.md` |
+| Applying KISS / DRY / SOLID / BEM in depth | `docs/methodologies/design-principles.md` |
 | Choosing a test type or coverage target | `docs/methodologies/testing.md` |
 | Branching, PR, release questions | `docs/methodologies/git-workflow.md` |
 | Approved tooling needs wiring | `docs/methodologies/tooling-setup.md` |

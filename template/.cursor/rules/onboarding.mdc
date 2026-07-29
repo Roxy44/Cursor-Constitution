@@ -97,7 +97,21 @@ Skip any question whose answer is already filled in `stack.mdc` (not `TBD`).
    re-ask. Reminder: this is **not** the programming language and **not** a ban on
    Russian (or other) UI strings / comments in source.
 2. **Project scope** — frontend, backend, fullstack, library, CLI, mobile.
-3. **Stack** — see the two branches below (frameworks, DB, etc.).
+3. **Stack** — see the two branches below (frameworks, DB, etc.). **CSS naming / BEM**
+   (frontend only) — decide from the styling stack, do **not** ask blindly:
+   - **Skip the question** (write `n/a` in `stack.mdc`) when styling is utility-first
+     and/or CSS-in-JS with no classic block classes: Tailwind, UnoCSS, Windi; 
+     styled-components, Emotion, Stitches, Linaria, vanilla-extract (styled API), Panda
+     styled, and similar. BEM does not apply there — asking would invite the agent to
+     invent `block__el` names next to `className="flex gap-2"` / `styled.div`, which is
+     wrong.
+   - **Ask** only when the project uses (or will use) classic named classes: CSS Modules,
+     SCSS/Sass/Less, plain `.css` blocks, or a hybrid where custom classes exist beside
+     utilities. Options: `bem` / `existing` (match repo) / `none`. Detect BEM-like
+     classes when present and confirm.
+   - Backend-only / no UI CSS → `n/a` without asking.
+   - KISS / DRY / SOLID are always on (constitution **P-6…P-8**); do not ask — only BEM
+     is optional, and only in the classic-CSS case above.
 4. **Package manager** — mandatory for JS/TS (and record for other ecosystems too):
    - **Existing:** infer from lockfiles / manifests, then confirm:
      `yarn.lock` → yarn; `pnpm-lock.yaml` → pnpm; `bun.lockb` / `bun.lock` → bun;

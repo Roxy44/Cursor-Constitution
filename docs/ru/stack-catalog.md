@@ -49,6 +49,20 @@
 - vanilla CSS
 - другое
 
+## Frontend — CSS naming (опционально)
+
+**Не предлагать эту группу**, если стили — Tailwind / UnoCSS / Windi или CSS-in-JS
+(styled-components, Emotion, Stitches, Linaria, …). Писать `CSS naming: n/a` — BEM там
+неприменим и его нельзя смешивать с utility или `styled` API.
+
+Спрашивать только при классических именованных классах: CSS Modules, SCSS/Sass/Less,
+обычный CSS (или гибрид, где всё ещё есть свои block-классы). Пишется в `stack.mdc` как
+**CSS naming**.
+
+- BEM (`block__element--modifier`)
+- существующее соглашение проекта (как уже в репо)
+- none (классический CSS без BEM)
+
 ## Frontend — состояние
 
 - локальный state (+ Context)
