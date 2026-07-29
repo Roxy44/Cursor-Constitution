@@ -3,6 +3,10 @@
 The same questions the agent asks via `onboarding.mdc`, written for a human. Use this if
 you want to fill `project/stack.mdc` by hand.
 
+In Cursor Chat the agent should ask these as **clickable multiple-choice** (one round, up
+to seven groups, with an "other" escape). A plain numbered list is only a fallback when
+that UI is unavailable (CLI / other clients).
+
 Works in two situations:
 
 | Situation | Where the stack comes from |
@@ -20,12 +24,16 @@ Works in two situations:
    - Existing project: what the manifest already shows — what to correct?
    - Empty project: pick from [`stack-catalog.md`](stack-catalog.md) (only groups that
      match question 2). "Other" is always fine.
-4. **Lint / format.** Choose explicitly: ESLint, Biome, oxlint, Ruff, Prettier, none, or
+4. **Package manager.** npm / pnpm / yarn / bun (or poetry / uv / go / cargo…). Infer from
+   the lockfile when present; confirm. `package-lock.json` alone can mean **npm or yarn**
+   — ask if `packageManager` / `.yarnrc*` do not settle it. Agent verifies the CLI is on
+   PATH; if missing — install hint or switch to an alternative (e.g. yarn → npm / bun).
+   All future installs use this choice only.
+5. **Lint / format.** Choose explicitly: ESLint, Biome, oxlint, Ruff, Prettier, none, or
    other. ESLint is one option, not the default.
-5. **Testing.** Which runner, and what is required before "done": a test per bug fix,
+6. **Testing.** Which runner, and what is required before "done": a test per bug fix,
    business logic only, or nothing yet.
-6. **Git.** Branching model, commit convention, whether the agent may commit when asked.
-7. **Hard constraints** and UI copy language (same as communication / English-only /
+7. **Git + hard constraints** and UI copy language (same as communication / English-only /
    i18n keys / no rule).
 
 ## Where answers go

@@ -109,7 +109,22 @@
 
 ## Менеджер пакетов
 
-- npm / pnpm / yarn / bun
+Выберите **один**. Агент будет ставить и обновлять зависимости только им.
+
+### JavaScript / TypeScript
+
+| Менеджер | Типичный lockfile | Заметки |
+| --- | --- | --- |
+| npm | `package-lock.json` | Дефолт с Node |
+| pnpm | `pnpm-lock.yaml` | Быстрый, строгий; удобен в монорепах |
+| yarn | `yarn.lock` (иногда только `package-lock.json`) | Classic или Berry; бывает yarn при одном `package-lock.json` — подтверждать, не мапить lock → npm автоматом |
+| bun | `bun.lockb` / `bun.lock` | Runtime + менеджер пакетов |
+
+Если выбранного CLI нет в PATH — сказать, как установить, или предложить другую строку
+таблицы (нет yarn → npm / pnpm / bun). Не смешивать lockfile без явной миграции.
+
+### Другие экосистемы
+
 - pip / poetry / uv
 - go modules
 - cargo

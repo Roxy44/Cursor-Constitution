@@ -68,8 +68,26 @@ that is already in the manifest wastes the user's time.
 
 ## Step 2 — Ask in one batch
 
-Ask everything at once as a short numbered list (or a single multiple-choice round). Keep
-it to at most seven questions. Never interrogate one question per message.
+Ask everything at once, at most seven questions. Never interrogate one question per message.
+
+**Presentation (mandatory when available):**
+
+1. **If the client exposes an interactive multiple-choice / structured question tool
+   (e.g. Cursor AskQuestion), you MUST use it.** Do not write a plain numbered list when
+   that tool is available. Soft "prefer" wording is wrong here — skip text and call the
+   tool.
+2. Fire **one round**: one interactive question per group below (up to seven), in a
+   single turn. Each question: clickable options, `allow_multiple` only when the group
+   truly needs multi-select (e.g. hard constraints), and an **"other / I'll type it"**
+   option (or free-text escape) in every group.
+3. Put the detected or recommended value **first** and label it
+   (e.g. `pnpm (detected from lockfile)`). Do not fight a committed lockfile without asking.
+4. **Fallback only when the tool is absent** (CLI, third-party client, or the tool call
+   fails): a short numbered list in plain text, telling the user they can answer as
+   `1) a, 2) ok, 3) …` in a single message.
+
+Either way the content of the questions is identical; only the input widget differs.
+Never ask the same batch twice — once via the tool, or once as text, not both.
 
 ### Always ask
 
@@ -79,16 +97,29 @@ Skip any question whose answer is already filled in `stack.mdc` (not `TBD`).
    re-ask. Reminder: this is **not** the programming language and **not** a ban on
    Russian (or other) UI strings / comments in source.
 2. **Project scope** — frontend, backend, fullstack, library, CLI, mobile.
-3. **Stack** — see the two branches below.
-4. **Lint / format** — pick explicitly from what was detected or from the catalog:
+3. **Stack** — see the two branches below (frameworks, DB, etc.).
+4. **Package manager** — mandatory for JS/TS (and record for other ecosystems too):
+   - **Existing:** infer from lockfiles / manifests, then confirm:
+     `yarn.lock` → yarn; `pnpm-lock.yaml` → pnpm; `bun.lockb` / `bun.lock` → bun;
+     `package-lock.json` → **npm or yarn** (both happen in the wild — do not assume
+     npm alone; check `package.json` `packageManager`, `.yarnrc` / `.yarnrc.yml`,
+     `.yarn/`, and ask if unclear); `poetry.lock` → poetry; `uv.lock` → uv;
+     `go.mod` → go modules; `Cargo.lock` → cargo. Prefer a committed `yarn.lock` /
+     `pnpm-lock.yaml` over a leftover `package-lock.json`. Do not fight a committed
+     lockfile without asking.
+   - **Greenfield:** offer choices from `docs/stack-catalog.md` (Package manager).
+   - After the choice, verify the CLI is on PATH (`npm -v`, `yarn -v`, `pnpm -v`,
+     `bun -v`, …). If missing: tell the user to install it **or** pick an available
+     alternative (yarn ↔ npm / pnpm / bun). Write the final choice into `stack.mdc`.
+   - From then on every install/update in this repo MUST use that manager (**W-6**).
+5. **Lint / format** — pick explicitly from what was detected or from the catalog:
    ESLint, Biome, oxlint, Ruff, golangci-lint, Prettier, none, or other. ESLint is
    **one option**, not the default. Only if the user chooses ESLint (or asks to
    bootstrap it) may you open `docs/methodologies/eslint-baseline.md`.
-5. **Testing** — which runner, and what is expected before "done".
-6. **Git** — branch strategy, commit convention, whether you may commit when asked.
-7. **Hard constraints** — what must never be introduced. Also confirm **UI / product
-   copy** if still default from install (same as communication / en-only / i18n keys /
-   no rule).
+6. **Testing** — which runner, and what is expected before "done".
+7. **Git + hard constraints** — branch strategy, commit convention, whether you may
+   commit when asked; what must never be introduced; confirm **UI / product copy** if
+   still default from install.
 
 ### Question 3 — existing project
 

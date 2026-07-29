@@ -110,7 +110,23 @@ the user names them. Multiple picks in one group are fine (e.g. ORM + database).
 
 ## Package manager
 
-- npm / pnpm / yarn / bun
+Pick **one**. The agent will use it for every install/update in the project.
+
+### JavaScript / TypeScript
+
+| Manager | Typical lockfile | Notes |
+| --- | --- | --- |
+| npm | `package-lock.json` | Default with Node |
+| pnpm | `pnpm-lock.yaml` | Fast, strict; good for monorepos |
+| yarn | `yarn.lock` (sometimes only `package-lock.json`) | Classic or Berry; some repos use yarn with `package-lock.json` — confirm, do not auto-map lock → npm |
+| bun | `bun.lockb` / `bun.lock` | Runtime + package manager |
+
+If the chosen CLI is not installed, tell the user to install it, or switch to another row
+in this table (e.g. yarn missing → npm / pnpm / bun). Do not mix lockfiles without an
+explicit migration.
+
+### Other ecosystems
+
 - pip / poetry / uv
 - go modules
 - cargo

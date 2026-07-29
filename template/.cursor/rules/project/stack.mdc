@@ -17,7 +17,7 @@ Rule `.mdc` files stay English. Everything below about "language" is for humans 
 - **Languages:** TBD (programming languages, e.g. TypeScript — not dialogue language)
 - **Frontend:** TBD (framework, styling, state, data layer)
 - **Backend:** TBD (runtime, framework, database, ORM)
-- **Package manager:** TBD
+- **Package manager:** TBD (e.g. npm / pnpm / yarn / bun — agent MUST use this for installs)
 - **Lint / format:** TBD (e.g. Biome / ESLint+Prettier / Ruff / none — not assumed)
 - **Tests:** TBD (runner, command, what is expected)
 - **Verify command(s):** TBD

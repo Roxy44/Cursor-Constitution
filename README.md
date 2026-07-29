@@ -108,8 +108,10 @@ Open your project and ask:
 
 > run onboarding from `.cursor/rules/onboarding.mdc`
 
-Language is already set. The agent confirms stack, **which linter you use** (or none), tests, and git.  
-It does **not** install packages unless you say yes.
+Language is already set. The agent confirms stack, **package manager** (npm / yarn / pnpm /
+bun — from lockfile or choice; checks PATH), **which linter you use** (or none), tests, and
+git. It does **not** install packages unless you say yes. Later installs always use the
+recorded package manager (**W-6**).
 
 ### 3. Work
 
@@ -128,6 +130,17 @@ Write features as usual. The agent follows the constitution, opens scoped rules 
 | 🟦 Memory | `.cursor/project-memory/` | Lessons / KB when relevant |
 
 **Token idea:** grow the library freely; keep the always-on budget ~150 lines.
+
+---
+
+## How package installs work
+
+| Piece | Role |
+| --- | --- |
+| `Package manager` in `stack.mdc` | Single source of truth (npm / pnpm / yarn / bun / …) |
+| Onboarding | Detects from lockfile or asks; verifies the CLI is on PATH |
+| Missing CLI | Agent stops, explains how to install it, or offers alternatives (e.g. no yarn → npm / bun) |
+| After approval (**W-6**) | Every `add` / `install` uses **only** that manager — no silent switches |
 
 ---
 

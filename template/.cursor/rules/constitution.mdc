@@ -42,7 +42,11 @@ comments unless `UI / product copy` or hard constraints say so.
 - **W-5 Report honestly.** What changed, what did not, assumptions, known limits. Never
   claim something works unverified.
 - **W-6 Ask before installing.** Packages, linter plugins, formatters, configs, editor
-  extensions — you MUST ask first. The project may cover the intent already.
+  extensions — you MUST ask first. The project may cover the intent already. After
+  approval, install **only** with the **Package manager** from `project/stack.mdc`
+  (never silently switch npm ↔ yarn ↔ pnpm ↔ bun). If that CLI is missing from PATH,
+  stop: say how to install it and offer alternatives from the same ecosystem
+  (e.g. yarn missing → npm / pnpm / bun) — update `stack.mdc` only if the user picks one.
 
 ## 3. Security
 
