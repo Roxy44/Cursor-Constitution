@@ -1,0 +1,62 @@
+---
+description: Frontend architecture — component boundaries, state, data fetching, styling, accessibility, performance. Applies to UI files.
+globs: ['**/*.{tsx,jsx,vue,svelte}', '**/*.{css,scss,sass,less}', '**/components/**', '**/pages/**', '**/app/**']
+alwaysApply: false
+---
+
+# Frontend
+
+Architecture for UI code. Form rules are in `code-style.mdc`. Deeper patterns and
+directory strategies: `docs/methodologies/frontend.md` — open it only when the structure
+of a new feature or layer is actually in question.
+
+## Components
+
+- Function components only. Follow the Rules of Hooks: top level of a component or a
+  hook, never inside loops, conditions, or plain functions.
+- One responsibility per component. Prefer composition over a component that branches on
+  many flags.
+- Keep files export-clean: a module exporting a component SHOULD NOT also export
+  unrelated utilities; move them to a sibling `utils.ts`.
+- Presentation and data access stay separable: a component that renders SHOULD NOT also
+  own transport details.
+
+## State
+
+- Choose the narrowest scope that works: local state → lifted state → shared store. Do
+  not reach for a global store for state one subtree needs.
+- Derive instead of duplicating. Two states that must agree are a bug waiting to happen.
+- Server data is not UI state: cache it with the project's data layer rather than copying
+  it into component state.
+- Do not introduce a second state library when one is already in use (**W-6**).
+
+## Data fetching
+
+- Handle all three states explicitly: loading, empty, error. An unhandled error state is
+  an incomplete feature.
+- Never trust a response shape blindly — validate or type-guard at the boundary
+  (constitution **S-2**).
+- Cancel or ignore stale responses on unmount and on rapid re-requests.
+
+## Styling
+
+- Detect the project's approach (Tailwind, CSS Modules, SCSS, CSS-in-JS) and stay with
+  it. Never add a second system without an explicit ask.
+- Inline `style` only for values that are genuinely dynamic.
+- With CSS Modules, reference classes through the module object; never hardcode generated
+  class names.
+- Spacing, color, and typography come from the project's tokens or scale, not ad-hoc
+  values.
+
+## Accessibility
+
+- Semantic elements first; `div` with a click handler is not a button.
+- Interactive elements are keyboard reachable and have an accessible name.
+- Images carry meaningful `alt`; decorative images carry empty `alt`.
+- Never convey state by color alone.
+
+## Performance
+
+- Fix the cause before adding memoization. Profile, do not guess.
+- Lists need stable keys, never array indexes for reorderable data.
+- Split heavy, rarely used views with lazy loading when the project supports it.

@@ -1,0 +1,128 @@
+---
+description: Onboarding interview for a new project — detect stack or offer catalog options for an empty repo, then write project/stack.mdc and prune unused rules. Use when setting up these rules, when the user asks to onboard or configure the constitution, or when project/stack.mdc still contains TBD.
+alwaysApply: false
+---
+
+# Onboarding interview
+
+Goal: turn this generic rule set into *this* project's rule set, in one short round. Run
+it once per project. Do not run it again unless the stack changed.
+
+**Language split (fixed):**
+
+- `.cursor/rules/*.mdc` — always English (token cost).
+- `docs/…` — human-facing methodologies, catalog, questionnaire (one language, unpacked
+  flat by install from the Constitution `docs/en` or `docs/ru` pack).
+- `.cursor/project-memory/` and filled `project/stack.mdc` values — communication language.
+
+Works for two starting points:
+
+| Situation | How to learn the stack |
+| --- | --- |
+| Existing repo with code / manifests | Detect from disk, then confirm |
+| Empty or nearly empty repo | Offer options from `docs/stack-catalog.md` |
+
+## Step 0 — Language (usually already done by install)
+
+Read `project/stack.mdc`.
+
+- If **Docs locale** and **Communication language** are already set (not `TBD`) and
+  `docs/` plus `.cursor/project-memory/` exist → **skip this step**. Language and
+  knowledge-base templates were chosen at install time; do not re-ask.
+- Only if they are still `TBD` or folders are missing: ask `en` or `ru`, then tell the
+  user to re-run `scripts/install.ps1` / `scripts/install.sh` with that locale
+  (preferred). That unpacks the pack into flat `docs/` and `.cursor/project-memory/`.
+
+From here on, every docs path is under flat `docs/…` (no `docs/ru` or `docs/en` in the
+target project).
+
+## Step 1 — Detect or classify as greenfield
+
+### Existing-project signal (any one is enough)
+
+Treat as **existing** if any of these are present:
+
+- A package / module manifest: `package.json`, `pnpm-workspace.yaml`, `go.mod`,
+  `pyproject.toml`, `requirements.txt`, `Cargo.toml`, `composer.json`, `pom.xml`,
+  `build.gradle`, `Gemfile`, `mix.exs`
+- A lockfile for any of the above
+- A non-trivial source tree: `src/`, `app/`, `apps/`, `packages/`, `lib/`, `cmd/`,
+  `internal/` containing multiple source files beyond a blank scaffold
+
+When existing: draft the stack from those files. Do **not** open the catalog. Ask only
+what the files cannot answer.
+
+### Greenfield signal
+
+Treat as **greenfield** only if **none** of the existing-project signals are present
+(empty folder, README-only, or rules-only checkout).
+
+When greenfield: open `docs/stack-catalog.md` and build the interview from those lists.
+Do not invent exotic stacks outside the catalog unless the user names them.
+
+If signals conflict (e.g. empty `package.json` with no deps), say so and ask the user to
+pick existing vs greenfield in one line — do not guess.
+
+Guessing a stack when the repo is empty is worse than asking. Asking about a dependency
+that is already in the manifest wastes the user's time.
+
+## Step 2 — Ask in one batch
+
+Ask everything at once as a short numbered list (or a single multiple-choice round). Keep
+it to at most seven questions. Never interrogate one question per message.
+
+### Always ask
+
+Skip any question whose answer is already filled in `stack.mdc` (not `TBD`).
+
+1. **Communication language** — only if still `TBD`. Normally set by install; do not
+   re-ask. Reminder: this is **not** the programming language and **not** a ban on
+   Russian (or other) UI strings / comments in source.
+2. **Project scope** — frontend, backend, fullstack, library, CLI, mobile.
+3. **Stack** — see the two branches below.
+4. **Lint / format** — pick explicitly from what was detected or from the catalog:
+   ESLint, Biome, oxlint, Ruff, golangci-lint, Prettier, none, or other. ESLint is
+   **one option**, not the default. Only if the user chooses ESLint (or asks to
+   bootstrap it) may you open `docs/methodologies/eslint-baseline.md`.
+5. **Testing** — which runner, and what is expected before "done".
+6. **Git** — branch strategy, commit convention, whether you may commit when asked.
+7. **Hard constraints** — what must never be introduced. Also confirm **UI / product
+   copy** if still default from install (same as communication / en-only / i18n keys /
+   no rule).
+
+### Question 3 — existing project
+
+Present what you detected and ask what to correct. Do not re-list the whole catalog.
+
+### Question 3 — greenfield
+
+Offer compact multiple-choice groups from `docs/stack-catalog.md`, only for the scopes
+chosen in question 2. Include an "other / I'll type it" option in every group.
+
+If the user skips a question, record a conservative default in `stack.mdc` and mark it as
+an assumption. For greenfield with no answer on a group, write `none yet` rather than
+inventing a library.
+
+## Step 3 — Write the results
+
+1. Fill `project/stack.mdc` with the answers. Facts only, no prose, no `TBD` left. Keep
+   it under ~30 lines. Machine ids (`en`, `pnpm`, `vitest`, `biome`) stay as-is; human
+   phrases use the communication language. **Docs root** stays `docs`.
+2. Ensure `.cursor/project-memory/` exists. After a normal install it already does — leave
+   it alone. Only if missing: re-run install or recreate the standard files in the
+   communication language. Never leave English section titles in a non-English project.
+3. Prune rules the project cannot use — a backend-only project keeps no `frontend.mdc`,
+   and vice versa.
+4. Do not translate rule `.mdc` files. They stay English.
+5. Do not assume ESLint (or any linter). Wire tooling docs only for what `Lint / format`
+   records.
+6. Greenfield only: do **not** install the chosen stack during onboarding. Record it and
+   propose install steps; wait for approval (**W-6**).
+
+## Step 4 — Report
+
+State in one short message (communication language): existing vs greenfield, docs locale
+pack used, what you detected or which catalog options were chosen, defaults assumed,
+files created or pruned, and what still needs a human decision.
+
+Never install anything during onboarding.
