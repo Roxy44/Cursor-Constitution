@@ -48,8 +48,8 @@ cp /path/to/Cursor-Constitution/example-code-style.mdc .cursor/rules/code-style.
 
 ```powershell
 New-Item -ItemType Directory -Force -Path .cursor\rules | Out-Null
-Copy-Item "C:\path\to\Cursor Constitution\constitution.mdc" .cursor\rules\
-Copy-Item "C:\path\to\Cursor Constitution\example-code-style.mdc" .cursor\rules\code-style.mdc
+Copy-Item "C:\path\to\Cursor-Constitution\constitution.mdc" .cursor\rules\
+Copy-Item "C:\path\to\Cursor-Constitution\example-code-style.mdc" .cursor\rules\code-style.mdc
 ```
 
 ### 2. Минимальные правки под проект
