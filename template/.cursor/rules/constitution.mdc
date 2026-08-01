@@ -81,12 +81,18 @@ comments unless `UI / product copy` or hard constraints say so.
 
 ## 5. Git
 
-- **G-1 Commit only when asked.** No commits without an explicit request.
+- **G-1 Commit only when asked.** No commits without an explicit request. Preparing a
+  commit message or staging locally is fine only after that ask — never invent "they
+  implied it" from a nearby task (fix, untrack, deploy prep, CI tweak).
 - **G-2 Conventional messages.** `type(scope): summary` — `feat`, `fix`, `refactor`,
   `docs`, `style`, `test`, `chore`.
 - **G-3 Explain the why.** The body covers intent, not a retelling of the diff.
 - **G-4 Never rewrite shared history.** No force-push to shared branches, no history
   rewrite, no skipped hooks, unless explicitly asked.
+- **G-5 Push only when asked.** Never `git push` (or publish commits / tags to a remote)
+  unless the user explicitly requests a push. The developer owns remotes. Finishing a
+  local fix, enabling Pages, or "making prod work" does **not** authorize a push —
+  report that a push is needed and wait.
 
 ## 6. Quality
 
