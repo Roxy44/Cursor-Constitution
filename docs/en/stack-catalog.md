@@ -138,6 +138,10 @@ If the chosen CLI is not installed, tell the user to install it, or switch to an
 in this table (e.g. yarn missing → npm / pnpm / bun). Do not mix lockfiles without an
 explicit migration.
 
+**Greenfield default:** put the chosen manager's lockfile in `.gitignore` (constitution
+**G-6**). Commit the manifest only; lock appears after local install. Override with
+`Lockfiles in git: commit` in `stack.mdc` when the team wants pinned CI.
+
 ### Other ecosystems
 
 - pip / poetry / uv
@@ -175,4 +179,5 @@ explicit migration.
 
 - trunk-based / GitHub Flow / Git Flow
 - Conventional Commits — yes / no
-- agent commits only when explicitly asked (constitution default)
+- agent never commits or pushes — drafts messages and lists commands for the developer
+  (constitution **G-1**, **G-5**; deploy / GitHub Pages included)

@@ -81,18 +81,31 @@ comments unless `UI / product copy` or hard constraints say so.
 
 ## 5. Git
 
-- **G-1 Commit only when asked.** No commits without an explicit request. Preparing a
-  commit message or staging locally is fine only after that ask — never invent "they
-  implied it" from a nearby task (fix, untrack, deploy prep, CI tweak).
-- **G-2 Conventional messages.** `type(scope): summary` — `feat`, `fix`, `refactor`,
-  `docs`, `style`, `test`, `chore`.
+- **G-1 Never commit.** The agent MUST NOT run `git commit`, `git add` for the purpose of
+  committing, amend, or create commits — **under any circumstances**: normal work, fixes,
+  CI, release prep, **deploy**, **GitHub Pages**, or finishing a task. Do not treat any
+  task wording as consent ("deploy", "make it live", "push to prod", "publish site").
+  When a commit is needed: say so, show a proposed message (and `git add` paths if
+  helpful), and **stop** — the developer commits locally.
+- **G-2 Conventional messages.** When drafting a commit message for the developer:
+  `type(scope): summary` — `feat`, `fix`, `refactor`, `docs`, `style`, `test`, `chore`.
 - **G-3 Explain the why.** The body covers intent, not a retelling of the diff.
 - **G-4 Never rewrite shared history.** No force-push to shared branches, no history
-  rewrite, no skipped hooks, unless explicitly asked.
-- **G-5 Push only when asked.** Never `git push` (or publish commits / tags to a remote)
-  unless the user explicitly requests a push. The developer owns remotes. Finishing a
-  local fix, enabling Pages, or "making prod work" does **not** authorize a push —
-  report that a push is needed and wait.
+  rewrite, no skipped hooks — the agent MUST NOT run these; tell the developer if needed.
+- **G-5 Never push.** The agent MUST NOT run `git push`, publish tags, or update any
+  remote branch — same absolute ban as **G-1**. Forbidden always: GitHub Pages /
+  `gh-pages`, `git subtree split` + push, pushing a built `dist` branch, deploy scripts
+  that commit then push, or `gh` / npm publish steps that touch remotes via git. Prepare
+  work locally, list the exact commands the developer should run, and **stop**.
+- **G-6 Lockfiles on greenfield.** When scaffolding a project from zero, package lockfiles
+  SHOULD be listed in `.gitignore` (e.g. `package-lock.json`, `yarn.lock`,
+  `pnpm-lock.yaml`, `bun.lock`, `bun.lockb`, and the equivalent for other ecosystems).
+  The committed source of truth is the manifest (`package.json`, `pyproject.toml`, …):
+  a developer installs from it and the lockfile appears locally. Goal: avoid the repo
+  freezing an aging dependency tree that silently ships known-vulnerable versions for
+  years. Do **not** untrack or delete lockfiles in an **existing** repo that already
+  commits them — ask first. If the user wants lockfiles committed (reproducible CI),
+  record `Lockfiles in git: commit` in `stack.mdc` and follow that.
 
 ## 6. Quality
 

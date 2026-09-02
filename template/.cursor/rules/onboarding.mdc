@@ -131,9 +131,13 @@ Skip any question whose answer is already filled in `stack.mdc` (not `TBD`).
    **one option**, not the default. Only if the user chooses ESLint (or asks to
    bootstrap it) may you open `docs/methodologies/eslint-baseline.md`.
 6. **Testing** — which runner, and what is expected before "done".
-7. **Git + hard constraints** — branch strategy, commit convention, whether you may
-   commit when asked; what must never be introduced; confirm **UI / product copy** if
-   still default from install.
+7. **Git + hard constraints** — branch strategy, commit convention; record that the agent
+   **never** commits or pushes (**G-1**, **G-5**) — only drafts messages and tells the
+   developer what to run; deploy / GitHub Pages never change that; what must never be
+   introduced; confirm **UI / product copy** if still default from install. **Greenfield:** default **Lockfiles in git: ignore**
+   (constitution **G-6**) — add the manager's lockfile to `.gitignore`; confirm if the
+   user instead wants lockfiles committed for pinned CI. **Existing:** keep whatever the
+   repo already does; do not remove committed lockfiles without asking.
 
 ### Question 3 — existing project
 
@@ -163,6 +167,10 @@ inventing a library.
    records.
 6. Greenfield only: do **not** install the chosen stack during onboarding. Record it and
    propose install steps; wait for approval (**W-6**).
+7. Greenfield only, when **Lockfiles in git** is `ignore` (default): ensure `.gitignore`
+   lists the relevant lockfile(s) for the chosen package manager. Do not commit them.
+   Manifest files stay tracked. If the user chose `commit`, leave lockfiles out of
+   `.gitignore` and note that in the report.
 
 ## Step 4 — Report
 

@@ -39,7 +39,10 @@ Works in two situations:
 6. **Testing.** Which runner, and what is required before "done": a test per bug fix,
    business logic only, or nothing yet.
 7. **Git + hard constraints** and UI copy language (same as communication / English-only /
-   i18n keys / no rule).
+   i18n keys / no rule). Agent **never** commits or pushes (**G-1**, **G-5**) — only
+   drafts messages and commands for the developer. **Greenfield:** default ignore package lockfiles in `.gitignore`
+   (manifest stays tracked; lock regenerates on local install). Confirm if the team wants
+   lockfiles committed instead. **Existing:** leave current lockfile practice alone.
 
 ## Where answers go
 
@@ -47,6 +50,7 @@ Works in two situations:
 | --- | --- |
 | Language, stack, verify commands, constraints | `.cursor/rules/project/stack.mdc` (always loaded — keep it short) |
 | CSS naming (BEM or not) | `CSS naming` in `stack.mdc` (`bem` / `existing` / `none` / `n/a`) |
+| Lockfiles in git | `Lockfiles in git` in `stack.mdc` (`ignore` default greenfield / `commit`) |
 | Project type | Which rules stay: `frontend.mdc`, `backend.mdc`, or both |
 | Agreements not visible in code | `.cursor/project-memory/knowledge-base.md` |
 | Ideas and deferred decisions | `.cursor/project-memory/ideas.md`, `tasks.md` |

@@ -19,10 +19,11 @@ Rule `.mdc` files stay English. Everything below about "language" is for humans 
 - **Backend:** TBD (runtime, framework, database, ORM)
 - **CSS naming:** TBD (bem / existing / none / n/a — ask only for classic CSS/SCSS/Modules; n/a for Tailwind & CSS-in-JS)
 - **Package manager:** TBD (e.g. npm / pnpm / yarn / bun — agent MUST use this for installs)
+- **Lockfiles in git:** TBD (ignore — default greenfield / commit — if team wants pinned CI)
 - **Lint / format:** TBD (e.g. Biome / ESLint+Prettier / Ruff / none — not assumed)
 - **Tests:** TBD (runner, command, what is expected)
 - **Verify command(s):** TBD
-- **Branching / commits:** TBD
+- **Branching / commits:** TBD (agent never commits or pushes — **G-1**, **G-5**)
 - **Hard constraints:** TBD
 
 ## Layout

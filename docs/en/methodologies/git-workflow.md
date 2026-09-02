@@ -1,7 +1,18 @@
 # Methodology: git workflow
 
-Reference for branching, commits, and releases. Hard prohibitions (no commit without
-asking, no history rewrite) live in the constitution §5.
+Reference for branching, commits, and releases. Hard prohibitions live in the constitution
+§5: the agent **never** commits and **never** pushes (**G-1**, **G-5**). Work, deploy,
+GitHub Pages, CI, or "make it live" do not change that — prepare locally, draft messages,
+list commands for the developer, and stop.
+
+## Agent must not (ever)
+
+- `git commit` / amend / staging commits as part of any workflow or deploy script
+- `git push` / push tags / push `gh-pages` or any built branch
+- `git subtree split` + push, or npm/yarn scripts whose purpose is remote publish via git
+
+When commit or push is needed, say so explicitly, show a proposed message and the exact
+commands — the **developer** runs them.
 
 ## Branching models
 
@@ -62,3 +73,18 @@ commit; changelog from conventional commits. Hotfix from the release tag, then b
 `.gitignore` covers build artifacts, dependencies, local configs, and `.env`. A secret that
 reached history is considered leaked: revoke and rotate first, then clean history. Large
 binaries go to LFS or external storage, not the repo.
+
+### Lockfiles (greenfield default)
+
+For a project started from zero, **prefer ignoring lockfiles** in git (constitution
+**G-6**): `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, `bun.lock` / `bun.lockb`,
+and the same idea for other ecosystems. Commit the manifest (`package.json`, …). After
+`install`, the lockfile appears on the developer machine and stays local.
+
+Why: a committed lock can pin an aging tree for years and keep known-vulnerable packages
+in every clone. Fresh install from the manifest pulls current resolutions within the
+declared ranges.
+
+Exceptions: if the team needs bit-for-bit reproducible CI, set `Lockfiles in git: commit`
+in `stack.mdc` and track the lockfile. Never strip lockfiles from an existing repo that
+already commits them without an explicit ask.
