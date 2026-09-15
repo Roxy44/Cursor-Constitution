@@ -12,6 +12,7 @@ Rule `.mdc` files stay English. Everything below about "language" is for humans 
 
 - **Communication language:** TBD
 - **Docs locale:** TBD (`en` | `ru` — which pack was unpacked into flat `docs/`)
+- **Acknowledgment keyword:** TBD (canary; every reply starts with `Вас понял, <word>.` / `Understood, <word>.`)
 - **UI / product copy:** TBD (same as communication / en-only / i18n keys / no rule)
 - **Project type:** TBD (frontend / backend / fullstack / library / CLI / mobile)
 - **Languages:** TBD (programming languages, e.g. TypeScript — not dialogue language)

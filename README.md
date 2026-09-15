@@ -109,9 +109,11 @@ Open your project and ask:
 > run onboarding from `.cursor/rules/onboarding.mdc`
 
 Language is already set. The agent confirms stack, **package manager** (npm / yarn / pnpm /
-bun — from lockfile or choice; checks PATH), **which linter you use** (or none), tests, and
-git. It does **not** install packages unless you say yes. Later installs always use the
-recorded package manager (**W-6**).
+bun — from lockfile or choice; checks PATH), **which linter you use** (or none), tests,
+git, and an **acknowledgment keyword**. After that, every reply starts with
+`Understood, <word>.` (English) or `Вас понял, <word>.` (Russian) so you can see the
+rules are still loaded. It does **not** install packages unless you say yes. Later
+installs always use the recorded package manager (**W-6**).
 
 ### 3. Work
 
@@ -123,7 +125,7 @@ Write features as usual. The agent follows the constitution, opens scoped rules 
 
 | Layer | Where | In context when |
 | :---: | --- | --- |
-| 🟥 Core | `constitution.mdc`, `project/stack.mdc` | Every chat |
+| 🟥 Core | `constitution.mdc`, `project/stack.mdc`, `acknowledgment.mdc` | Every chat |
 | 🟧 Scoped | `code-style`, `frontend`, `backend`, `testing` | Matching files (globs) |
 | 🟨 On request | `onboarding`, `retrospective` | Agent decides by description |
 | 🟩 Reference | `docs/**` | Agent opens the file |
@@ -171,7 +173,8 @@ If you choose **none**, the agent still tries to follow `code-style.mdc`, but no
 | File | Job |
 | --- | --- |
 | `constitution.mdc` | Non-negotiables + map to everything else |
-| `project/stack.mdc` | Your stack, language, lint choice, CSS naming / BEM (filled by install + onboarding) |
+| `acknowledgment.mdc` | Liveness canary — exact `Understood, …` / `Вас понял, …` line (filled at onboarding) |
+| `project/stack.mdc` | Your stack, language, lint choice, CSS naming / BEM, keyword (filled by install + onboarding) |
 | `code-style.mdc` | Form + linter intents |
 | `frontend.mdc` / `backend.mdc` / `testing.mdc` | Short architecture per area |
 | `onboarding.mdc` | Stack / tooling interview |

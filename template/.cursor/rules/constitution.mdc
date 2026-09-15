@@ -16,6 +16,12 @@ mirror the language of the user's message. Communication language is for dialogu
 `project-memory` only — it does **not** forbid other languages in source UI strings or
 comments unless `UI / product copy` or hard constraints say so.
 
+**C-1 Acknowledgment canary.** If `acknowledgment.mdc` has a real keyword (not `TBD`),
+every user-facing reply MUST start with that file's exact line (`Вас понял, …` when
+communication language is `ru`, `Understood, …` when `en`), then the answer. This is
+how the user sees that project rules are still in context — if the line vanishes, they
+should treat the session as untrusted. Do not invent a keyword; finish onboarding first.
+
 ## 1. Principles
 
 - **P-1 Context first.** Read the relevant files and follow existing patterns before
@@ -143,6 +149,7 @@ Load exactly one of these when its trigger matches. Never open them all.
 | API, services, data layer | `backend.mdc` (auto by globs) |
 | Writing or fixing tests | `testing.mdc` (auto by globs) |
 | Setting up rules in a new project | `onboarding.mdc` |
+| Canary phrase / keyword for replies | `acknowledgment.mdc` (always-on; filled at onboarding) |
 | Empty repo — need stack options | `docs/stack-catalog.md` (via onboarding) |
 | Recording a lesson after a failure | `retrospective.mdc` |
 | Need deeper architecture guidance | `docs/methodologies/{frontend,backend}.md` |

@@ -68,7 +68,8 @@ that is already in the manifest wastes the user's time.
 
 ## Step 2 — Ask in one batch
 
-Ask everything at once, at most seven questions. Never interrogate one question per message.
+Ask everything at once, at most seven multiple-choice groups plus the free-text
+keyword (C-1). Never interrogate one question per message.
 
 **Presentation (mandatory when available):**
 
@@ -77,9 +78,11 @@ Ask everything at once, at most seven questions. Never interrogate one question 
    that tool is available. Soft "prefer" wording is wrong here — skip text and call the
    tool.
 2. Fire **one round**: one interactive question per group below (up to seven), in a
-   single turn. Each question: clickable options, `allow_multiple` only when the group
-   truly needs multi-select (e.g. hard constraints), and an **"other / I'll type it"**
-   option (or free-text escape) in every group.
+   single turn, plus the acknowledgment keyword as **free text** in that same turn (chat
+   message, not a multiple-choice option — do not invent suggested words). Each MC
+   question: clickable options, `allow_multiple` only when the group truly needs
+   multi-select (e.g. hard constraints), and an **"other / I'll type it"** option (or
+   free-text escape) in every group.
 3. Put the detected or recommended value **first** and label it
    (e.g. `pnpm (detected from lockfile)`). Do not fight a committed lockfile without asking.
 4. **Fallback only when the tool is absent** (CLI, third-party client, or the tool call
@@ -91,7 +94,8 @@ Never ask the same batch twice — once via the tool, or once as text, not both.
 
 ### Always ask
 
-Skip any question whose answer is already filled in `stack.mdc` (not `TBD`).
+Skip any question whose answer is already filled in `stack.mdc` (not `TBD`), including
+the keyword if `Acknowledgment keyword` is already set.
 
 1. **Communication language** — only if still `TBD`. Normally set by install; do not
    re-ask. Reminder: this is **not** the programming language and **not** a ban on
@@ -138,6 +142,18 @@ Skip any question whose answer is already filled in `stack.mdc` (not `TBD`).
    (constitution **G-6**) — add the manager's lockfile to `.gitignore`; confirm if the
    user instead wants lockfiles committed for pinned CI. **Existing:** keep whatever the
    repo already does; do not remove committed lockfiles without asking.
+8. **Acknowledgment keyword** — mandatory free text (constitution **C-1**). Ask the user
+   to type a word they will recognize. Explain in the communication language: from then
+   on every agent reply will start with that canary so they can see rules are still
+   loaded; if the phrase stops appearing, they should treat the session as drifting.
+   - Phrase from **Communication language** (not docs locale, not the latest message):
+     `ru` → `Вас понял, <keyword>.` / `en` → `Understood, <keyword>.` (only these two
+     locales exist today; do not invent a third prefix).
+   - Do **not** suggest a word, do **not** default one, do **not** skip this. If they
+     omit it, ask again before writing results — unlike other skips, there is no
+     conservative default.
+   - Write the keyword into `project/stack.mdc` and the exact one-line phrase into
+     `acknowledgment.mdc` (replace `TBD` in both). Keep rule-file commentary in English.
 
 ### Question 3 — existing project
 
@@ -149,8 +165,9 @@ Offer compact multiple-choice groups from `docs/stack-catalog.md`, only for the 
 chosen in question 2. Include an "other / I'll type it" option in every group.
 
 If the user skips a question, record a conservative default in `stack.mdc` and mark it as
-an assumption. For greenfield with no answer on a group, write `none yet` rather than
-inventing a library.
+an assumption — **except** the acknowledgment keyword, which has no default (item 8).
+For greenfield with no answer on a group, write `none yet` rather than inventing a
+library.
 
 ## Step 3 — Write the results
 
@@ -171,6 +188,10 @@ inventing a library.
    lists the relevant lockfile(s) for the chosen package manager. Do not commit them.
    Manifest files stay tracked. If the user chose `commit`, leave lockfiles out of
    `.gitignore` and note that in the report.
+8. Fill `acknowledgment.mdc`: set **Keyword** and **Prefix language** (`en` | `ru`), and
+   put the exact canary line in the fenced block (`Understood, word.` or
+   `Вас понял, word.`). Do not leave `TBD` there. The Step 4 report itself MUST open
+   with that line.
 
 ## Step 4 — Report
 

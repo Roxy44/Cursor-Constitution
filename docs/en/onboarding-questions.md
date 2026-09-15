@@ -4,8 +4,9 @@ The same questions the agent asks via `onboarding.mdc`, written for a human. Use
 you want to fill `project/stack.mdc` by hand.
 
 In Cursor Chat the agent should ask these as **clickable multiple-choice** (one round, up
-to seven groups, with an "other" escape). A plain numbered list is only a fallback when
-that UI is unavailable (CLI / other clients).
+to seven groups, with an "other" escape) **plus** a free-text acknowledgment keyword in
+the same turn. A plain numbered list is only a fallback when that UI is unavailable
+(CLI / other clients).
 
 Works in two situations:
 
@@ -43,12 +44,17 @@ Works in two situations:
    drafts messages and commands for the developer. **Greenfield:** default ignore package lockfiles in `.gitignore`
    (manifest stays tracked; lock regenerates on local install). Confirm if the team wants
    lockfiles committed instead. **Existing:** leave current lockfile practice alone.
+8. **Acknowledgment keyword.** Type a word you will recognize. Every later agent reply
+   starts with a canary so you can see rules are still loaded — if the line vanishes,
+   the session is drifting. Russian communication language → `Вас понял, <word>.`;
+   English → `Understood, <word>.` No suggested word and no skip: this has no default.
 
 ## Where answers go
 
 | Answer | Destination |
 | --- | --- |
-| Language, stack, verify commands, constraints | `.cursor/rules/project/stack.mdc` (always loaded — keep it short) |
+| Language, stack, verify commands, constraints, acknowledgment keyword | `.cursor/rules/project/stack.mdc` (always loaded — keep it short) |
+| Canary line (`Вас понял, …` / `Understood, …`) | `.cursor/rules/acknowledgment.mdc` (always loaded) |
 | CSS naming (BEM or not) | `CSS naming` in `stack.mdc` (`bem` / `existing` / `none` / `n/a`) |
 | Lockfiles in git | `Lockfiles in git` in `stack.mdc` (`ignore` default greenfield / `commit`) |
 | Project type | Which rules stay: `frontend.mdc`, `backend.mdc`, or both |

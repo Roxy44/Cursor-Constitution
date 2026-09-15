@@ -1,0 +1,23 @@
+---
+description: Liveness canary — every user-facing reply starts with the project phrase plus keyword (filled at onboarding).
+alwaysApply: true
+---
+
+# Acknowledgment canary
+
+Liveness check: the user verifies the agent is still loading project rules. If this
+prefix disappears from replies, treat the session as no longer following the constitution.
+
+**Keyword:** TBD
+**Prefix language:** TBD (`en` → `Understood, <keyword>.` / `ru` → `Вас понял, <keyword>.`)
+
+When the keyword is not `TBD`, every user-facing chat reply MUST begin with the exact
+line in the block below (same spelling and punctuation), then the answer.
+
+```
+TBD
+```
+
+Do not skip this on short answers, follow-ups, or after tool use. Do not put it only in
+thinking. Do not translate or rephrase the line. Do not insert extra words inside it.
+If the keyword is still `TBD`, do not invent one — finish onboarding first (`onboarding.mdc`).
